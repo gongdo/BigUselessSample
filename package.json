@@ -1,0 +1,26 @@
+{
+  "name": "biguselesssample",
+  "version": "1.0.0",
+  "description": "NodeJs with gulp sample that fires VSTS release error",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "download https://noto-website.storage.googleapis.com/pkgs/Noto-hinted.zip -o resources",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gongdo/BigUselessSample.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gongdo/BigUselessSample/issues"
+  },
+  "homepage": "https://github.com/gongdo/BigUselessSample#readme",
+  "dependencies": {
+    "express": "^4.15.4"
+  },
+  "devDependencies": {
+    "download-cli": "^1.0.5",
+  }
+}
