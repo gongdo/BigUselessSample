@@ -1,0 +1,281 @@
+{
+    "options": [
+        {
+            "enabled": false,
+            "definition": {
+                "id": "5d58cc01-7c75-450c-be18-a388ddb129ec"
+            },
+            "inputs": {
+                "branchFilters": "[\"+refs/heads/*\"]",
+                "additionalFields": "{}"
+            }
+        },
+        {
+            "enabled": false,
+            "definition": {
+                "id": "7c555368-ca64-4199-add6-9ebaf0b0137d"
+            },
+            "inputs": {
+                "multipliers": "[]",
+                "parallel": "false",
+                "continueOnError": "true",
+                "additionalFields": "{}"
+            }
+        },
+        {
+            "enabled": false,
+            "definition": {
+                "id": "a9db38f9-9fdc-478c-b0f9-464221e58316"
+            },
+            "inputs": {
+                "workItemType": "914961",
+                "assignToRequestor": "true",
+                "additionalFields": "{}"
+            }
+        },
+        {
+            "enabled": false,
+            "definition": {
+                "id": "57578776-4c22-4526-aeb0-86b6da17ee9c"
+            },
+            "inputs": {}
+        }
+    ],
+    "retentionRules": [
+        {
+            "branches": [
+                "+refs/heads/*"
+            ],
+            "artifacts": [],
+            "artifactTypesToDelete": [
+                "FilePath",
+                "SymbolStore"
+            ],
+            "daysToKeep": 10,
+            "minimumToKeep": 1,
+            "deleteBuildRecord": true,
+            "deleteTestResults": true
+        }
+    ],
+    "metrics": [
+        {
+            "name": "CurrentBuildsInQueue",
+            "scope": "refs/heads/master",
+            "intValue": 0
+        },
+        {
+            "name": "CurrentBuildsInProgress",
+            "scope": "refs/heads/master",
+            "intValue": 0
+        },
+        {
+            "name": "CanceledBuilds",
+            "scope": "refs/heads/master",
+            "intValue": 0,
+            "date": "2017-08-10T00:00:00.000Z"
+        },
+        {
+            "name": "FailedBuilds",
+            "scope": "refs/heads/master",
+            "intValue": 2,
+            "date": "2017-08-10T00:00:00.000Z"
+        },
+        {
+            "name": "PartiallySuccessfulBuilds",
+            "scope": "refs/heads/master",
+            "intValue": 0,
+            "date": "2017-08-10T00:00:00.000Z"
+        },
+        {
+            "name": "SuccessfulBuilds",
+            "scope": "refs/heads/master",
+            "intValue": 1,
+            "date": "2017-08-10T00:00:00.000Z"
+        },
+        {
+            "name": "TotalBuilds",
+            "scope": "refs/heads/master",
+            "intValue": 3,
+            "date": "2017-08-10T00:00:00.000Z"
+        }
+    ],
+    "_links": {
+        "self": {
+            "href": "https://gongdo-test.visualstudio.com/f828c676-aaa8-4165-9ac7-f4c1c83db67a/_apis/build/Definitions/19"
+        },
+        "web": {
+            "href": "https://gongdo-test.visualstudio.com/_permalink/_build/index?collectionId=86482e0e-8930-425a-92cc-fb01e3cc9228&projectId=f828c676-aaa8-4165-9ac7-f4c1c83db67a&definitionId=19"
+        },
+        "editor": {
+            "href": "https://gongdo-test.visualstudio.com/_permalink/_build/definitionEditor?collectionId=86482e0e-8930-425a-92cc-fb01e3cc9228&projectId=f828c676-aaa8-4165-9ac7-f4c1c83db67a&definitionId=19"
+        }
+    },
+    "buildNumberFormat": "$(date:yyyyMMdd)$(rev:.r)",
+    "jobAuthorizationScope": 1,
+    "jobTimeoutInMinutes": 60,
+    "jobCancelTimeoutInMinutes": 5,
+    "process": {
+        "phases": [
+            {
+                "steps": [
+                    {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "npm install",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "refName": "Npm1",
+                        "task": {
+                            "id": "fe47e961-9fa8-4106-8639-368c022d43ad",
+                            "versionSpec": "1.*",
+                            "definitionType": "task"
+                        },
+                        "inputs": {
+                            "command": "install",
+                            "workingDir": "",
+                            "verbose": "false",
+                            "customCommand": "",
+                            "customRegistry": "useNpmrc",
+                            "customFeed": "",
+                            "customEndpoint": "",
+                            "publishRegistry": "useExternalRegistry",
+                            "publishFeed": "",
+                            "publishEndpoint": ""
+                        }
+                    },
+                    {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Archive files ",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "refName": "ArchiveFiles3",
+                        "task": {
+                            "id": "d8b84976-e99a-4b86-b885-4849694435b0",
+                            "versionSpec": "1.*",
+                            "definitionType": "task"
+                        },
+                        "inputs": {
+                            "rootFolder": "$(System.DefaultWorkingDirectory)",
+                            "includeRootFolder": "false",
+                            "archiveType": "default",
+                            "tarCompression": "gz",
+                            "archiveFile": "$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip",
+                            "replaceExistingArchive": "true"
+                        }
+                    },
+                    {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Azure App Service Deploy: gongdo-node-test",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "refName": "AzureRmWebAppDeployment5",
+                        "task": {
+                            "id": "497d490f-eea7-4f2b-ab94-48d9c1acdcb1",
+                            "versionSpec": "3.*",
+                            "definitionType": "task"
+                        },
+                        "inputs": {
+                            "ConnectedServiceName": "6c5b4f52-1c17-4b1f-aeb5-fd313b536f5a",
+                            "WebAppName": "gongdo-node-test",
+                            "WebAppKind": "app",
+                            "DeployToSlotFlag": "false",
+                            "ResourceGroupName": "",
+                            "SlotName": "",
+                            "DockerNamespace": "",
+                            "DockerRepository": "",
+                            "DockerImageTag": "",
+                            "StartupCommand": "",
+                            "VirtualApplication": "",
+                            "Package": "$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip",
+                            "WebAppUri": "",
+                            "ScriptType": "",
+                            "InlineScript": ":: You can provide your deployment commands here. One command per line.",
+                            "ScriptPath": "",
+                            "GenerateWebConfig": "false",
+                            "WebConfigParameters": "",
+                            "AppSettings": "",
+                            "TakeAppOfflineFlag": "true",
+                            "UseWebDeploy": "true",
+                            "SetParametersFile": "",
+                            "RemoveAdditionalFilesFlag": "false",
+                            "ExcludeFilesFromAppDataFlag": "false",
+                            "AdditionalArguments": "",
+                            "RenameFilesFlag": "true",
+                            "XmlTransformation": "false",
+                            "XmlVariableSubstitution": "false",
+                            "JSONFiles": ""
+                        }
+                    }
+                ],
+                "name": null,
+                "jobAuthorizationScope": 0
+            }
+        ],
+        "type": 1
+    },
+    "repository": {
+        "properties": {
+            "cleanOptions": "0",
+            "gitLfsSupport": "false",
+            "skipSyncSource": "false",
+            "checkoutNestedSubmodules": "false",
+            "reportBuildStatus": "true",
+            "fetchDepth": "0",
+            "connectedServiceId": "fe469642-8acb-4f4e-af5a-b17fee62713e",
+            "apiUrl": "https://api.github.com/repos/gongdo/BigUselessSample",
+            "branchesUrl": "https://api.github.com/repos/gongdo/BigUselessSample/branches",
+            "cloneUrl": "https://github.com/gongdo/BigUselessSample.git",
+            "refsUrl": "https://api.github.com/repos/gongdo/BigUselessSample/git/refs"
+        },
+        "id": "https://github.com/gongdo/BigUselessSample.git",
+        "type": "GitHub",
+        "name": "gongdo/BigUselessSample",
+        "url": "https://github.com/gongdo/BigUselessSample.git",
+        "defaultBranch": "master",
+        "clean": "false",
+        "checkoutSubmodules": false
+    },
+    "processParameters": {},
+    "quality": 1,
+    "authoredBy": {
+        "id": "43cfa426-fb8d-4315-8863-4d58ddd4e585",
+        "displayName": "Gongdo Gong",
+        "uniqueName": "gongdo@live.net",
+        "url": "https://app.vssps.visualstudio.com/A9137baae-7d9c-4500-8705-99c468fded0b/_apis/Identities/43cfa426-fb8d-4315-8863-4d58ddd4e585",
+        "imageUrl": "httpgongdo-testapul.visualstudio.com/_api/_common/identityImage?id=43cfa426-fb8d-4315-8863-4d58ddd4e585"
+    },
+    "queue": {
+        "id": 11,
+        "name": "Hosted VS2017",
+        "pool": {
+            "id": 4,
+            "name": "Hosted VS2017",
+            "isHosted": true
+        }
+    },
+    "id": 19,
+    "name": "test-big-dist",
+    "url": "https://bgongdo-testvisualstudio.com/f828c676-aaa8-4165-9ac7-f4c1c83db67a/_apis/build/Definitions/19",
+    "uri": "vstfs:///Build/Definition/19",
+    "path": "\\",
+    "type": 2,
+    "revision": 1,
+    "createdDate": "2017-08-10T03:05:46.580Z",
+    "project": {
+        "id": "f828c676-aaa8-4165-9ac7-f4c1c83db67a",
+        "name": "test",
+        "description": "test",
+        "url": "https://bgongdo-testvisualstudio.com/_apis/projects/f828c676-aaa8-4165-9ac7-f4c1c83db67a",
+        "state": "wellFormed",
+        "revision": 94267211,
+        "visibility": 0
+    }
+}
