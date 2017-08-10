@@ -21,6 +21,6 @@
     "express": "^4.15.4"
   },
   "devDependencies": {
-    "download-cli": "^1.0.5",
+    "download-cli": "^1.0.5"
   }
 }
